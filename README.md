@@ -137,3 +137,162 @@ job-application-portal/
 ├── README.md
 └── server.js
 ```
+## API Request and Response Examples
+
+### 1. Register Candidate
+
+**POST** `/api/auth/register`
+
+**Request:**
+
+```json
+{
+  "name": "Tanvi",
+  "email": "tanvi@example.com",
+  "password": "Test@12345"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Registration successful",
+  "user": {
+    "id": "USER_ID",
+    "name": "Tanvi",
+    "email": "tanvi@example.com"
+  }
+}
+```
+
+### 2. Login
+
+**POST** `/api/auth/login`
+
+**Request:**
+
+```json
+{
+  "email": "tanvi@example.com",
+  "password": "Test@12345"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Login successful",
+  "token": "JWT_TOKEN",
+  "user": {
+    "id": "USER_ID",
+    "name": "Tanvi",
+    "email": "tanvi@example.com"
+  }
+}
+```
+
+### 3. Get All Jobs
+
+**GET** `/api/jobs`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "count": 3,
+  "jobs": [
+    {
+      "_id": "JOB_ID",
+      "title": "Java Backend Developer",
+      "company": "Tech Solutions Pvt Ltd",
+      "location": "Ahmedabad"
+    }
+  ]
+}
+```
+
+### 4. Apply for a Job
+
+**POST** `/api/applications`
+
+**Header:**
+
+```text
+Authorization: Bearer JWT_TOKEN
+```
+
+**Request:**
+
+```json
+{
+  "jobId": "JOB_ID"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Application submitted successfully",
+  "application": {
+    "_id": "APPLICATION_ID",
+    "candidate": "USER_ID",
+    "job": "JOB_ID",
+    "resume": "resume.pdf",
+    "status": "Applied"
+  }
+}
+```
+
+### 5. View My Applications
+
+**GET** `/api/applications/my`
+
+**Header:**
+
+```text
+Authorization: Bearer JWT_TOKEN
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "count": 1,
+  "applications": []
+}
+```
+
+### 6. Upload Resume
+
+**POST** `/api/resume/upload`
+
+**Header:**
+
+```text
+Authorization: Bearer JWT_TOKEN
+```
+
+**Body:**
+
+```text
+form-data
+resume: <PDF file>
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Resume uploaded successfully",
+  "resume": "resume-file-name.pdf"
+}
+```
