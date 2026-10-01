@@ -1,0 +1,177 @@
+{
+  "info": {
+    "name": "Job Application Portal API",
+    "description": "Postman collection for testing the Job Application Portal REST APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Tanvi\",\n  \"email\": \"tanvi@example.com\",\n  \"password\": \"Test@12345\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/register",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "auth", "register"]
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"tanvi@example.com\",\n  \"password\": \"Test@12345\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "Get All Jobs",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/jobs",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "jobs"]
+        }
+      }
+    },
+    {
+      "name": "Get Job By ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/jobs/{{jobId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "jobs", "{{jobId}}"]
+        }
+      }
+    },
+    {
+      "name": "Create Job",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Java Backend Developer\",\n  \"company\": \"Tech Solutions Pvt Ltd\",\n  \"location\": \"Ahmedabad\",\n  \"description\": \"Java backend development role.\",\n  \"skills\": [\"Java\", \"Spring Boot\", \"MongoDB\"],\n  \"salary\": \"₹4-6 LPA\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/jobs",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "jobs"]
+        }
+      }
+    },
+    {
+      "name": "Upload Resume",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "resume",
+              "type": "file",
+              "src": ""
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/resume/upload",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "resume", "upload"]
+        }
+      }
+    },
+    {
+      "name": "Apply For Job",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jobId\": \"{{jobId}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/applications",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "applications"]
+        }
+      }
+    },
+    {
+      "name": "My Applications",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/applications/my",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "applications", "my"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "jobId",
+      "value": ""
+    }
+  ]
+}
